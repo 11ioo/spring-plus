@@ -1,5 +1,7 @@
 package org.example.expert.domain.comment.service;
 
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToOne;
 import lombok.RequiredArgsConstructor;
 import org.example.expert.domain.comment.dto.request.CommentSaveRequest;
 import org.example.expert.domain.comment.dto.response.CommentResponse;
@@ -46,7 +48,7 @@ public class CommentService {
                 new UserResponse(user.getId(), user.getEmail())
         );
     }
-
+    @ManyToOne(fetch = FetchType.LAZY)
     public List<CommentResponse> getComments(long todoId) {
         List<Comment> commentList = commentRepository.findByTodoIdWithUser(todoId);
 
