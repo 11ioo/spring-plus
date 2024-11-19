@@ -17,4 +17,10 @@ public class AuthUser {
         this.userRole = userRole;
         this.nickname = nickname;
     }
+
+    public AuthUser(Long id, String email,UserRole userRole) {
+        this.id = id;
+        this.email = email;
+        this.userRole = userRole;
+    }
 }
