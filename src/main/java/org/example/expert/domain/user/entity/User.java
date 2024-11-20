@@ -1,10 +1,10 @@
 package org.example.expert.domain.user.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.expert.domain.common.dto.AuthUser;
+import lombok.Builder;
+import org.example.expert.config.security.AuthUser;
 import org.example.expert.domain.common.entity.Timestamped;
 import org.example.expert.domain.user.enums.UserRole;
 
@@ -39,16 +39,15 @@ public class User extends Timestamped {
     }
 
     @Builder
-    public User(Long id, String email, String password, UserRole userRole, String nickname) {
+    private User(Long id, String email, UserRole userRole, String nickname) {
         this.id = id;
         this.email = email;
-        this.password = password;
         this.userRole = userRole;
         this.nickname = nickname;
     }
 
     public static User fromAuthUser(AuthUser authUser) {
-        return new User(authUser.getId(), authUser.getEmail(),authUser.getNickname() ,authUser.getUserRole());
+        return new User(authUser.getId(), authUser.getEmail(),authUser.getNickname() ,authUser.getRole());
     }
 
     public void changePassword(String password) {
@@ -58,4 +57,6 @@ public class User extends Timestamped {
     public void updateRole(UserRole userRole) {
         this.userRole = userRole;
     }
+
+
 }
